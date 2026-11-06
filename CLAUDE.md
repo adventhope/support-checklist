@@ -10,6 +10,7 @@ Every change to the list happens in `checklist.md`. The format is strict:
 - `## Group name` starts an optional sub-group inside a section.
 - `- Item text` is one checkbox. One line per item.
 - `Done by: 9:00 AM` right under a `#` heading sets the Sabbath deadline for every item in that section. Under a `##` heading it sets the deadline for just that sub-group. Sections without one have no deadline.
+- A line starting with `<!--` is ignored. To pause an item without losing it, wrap it: `<!-- HIATUS (reason): - Item text -->`. To bring it back, remove the wrapper.
 - Blank lines are fine. Any other kind of line makes the deploy fail on purpose, so the live site never breaks.
 
 Order in the file is the order on the site.

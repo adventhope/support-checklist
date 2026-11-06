@@ -6,12 +6,12 @@
 # Pre-Service Setup (Before 9 AM)
 Done by: 9:00 AM
 
-## When Opening the Building
-- Turn on the AC in the downstairs lobby (near the men’s restroom) and set it to 71°F.
-- Turn on both AC units in the fellowship hall (by the windows) and set them to 71°F.
-- Turn on the AC in the first Sabbath School room and set it to 71°F.
-- Turn on the AC in the second Sabbath School room and set it to 71°F.
-- Turn on the AC in the third Sabbath School room and set it to 71°F.
+<!-- HIATUS (AC out for the winter): ## When Opening the Building -->
+<!-- HIATUS (AC out for the winter): - Turn on the AC in the downstairs lobby (near the men’s restroom) and set it to 71°F. -->
+<!-- HIATUS (AC out for the winter): - Turn on both AC units in the fellowship hall (by the windows) and set them to 71°F. -->
+<!-- HIATUS (AC out for the winter): - Turn on the AC in the first Sabbath School room and set it to 71°F. -->
+<!-- HIATUS (AC out for the winter): - Turn on the AC in the second Sabbath School room and set it to 71°F. -->
+<!-- HIATUS (AC out for the winter): - Turn on the AC in the third Sabbath School room and set it to 71°F. -->
 
 ## Headsets
 - Put on a headset.
