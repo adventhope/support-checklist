@@ -1,23 +1,11 @@
 import type { Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 import { ITEMS, ITEM_IDS, SOURCE_DATE } from "../lib/items.mjs";
+import { weekStart } from "../lib/time.mjs";
 
 // One blob per checked item: key "<weekStart>/<itemId>", value { by, at }.
 // Separate keys mean two volunteers ticking different items never overwrite each other.
 // Weeks run Sunday 00:00 to Saturday 23:59, America/New_York, so ticks clear Sunday at midnight.
-
-const TZ = "America/New_York";
-
-function weekStart(now = new Date()): string {
-  const p = Object.fromEntries(
-    new Intl.DateTimeFormat("en-US", {
-      timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit", weekday: "short",
-    }).formatToParts(now).map((x) => [x.type, x.value]),
-  );
-  const dow = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(p.weekday);
-  const d = new Date(Date.UTC(+p.year, +p.month - 1, +p.day - dow));
-  return d.toISOString().slice(0, 10);
-}
 
 const store = () => getStore({ name: "support-checks", consistency: "strong" });
 

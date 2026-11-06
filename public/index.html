@@ -78,6 +78,8 @@ summary .count.full { background: var(--accent); color: var(--accent-ink); }
 summary .chev { flex: none; transition: transform .2s; color: var(--muted); }
 details[open] > summary .chev { transform: rotate(90deg); }
 summary .title { flex: 1; min-width: 0; }
+summary .due { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-top: 2px; }
+summary .due.late { color: var(--danger); }
 .group { padding: 10px 16px 4px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--line); }
 
 label.item {
@@ -197,6 +199,19 @@ dialog .secondary { background: transparent; color: var(--muted); }
     catch { return ""; }
   }
 
+  function dueLabel(hhmm) {
+    let [h, m] = hhmm.split(":").map(Number);
+    const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12;
+    return `${h}:${String(m).padStart(2, "0")} ${ap}`;
+  }
+  // True on Saturday (Eastern) once the "Done by" time has passed.
+  function isLate(hhmm) {
+    const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: TZ, weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date()).map((x) => [x.type, x.value]));
+    if (p.weekday !== "Sat") return false;
+    const [h, m] = hhmm.split(":").map(Number);
+    return +p.hour * 60 + +p.minute >= h * 60 + m;
+  }
+
   function render() {
     const done = items.filter((i) => checks[i.id]).length;
     $("count").textContent = `${done} of ${items.length}`;
@@ -221,6 +236,13 @@ dialog .secondary { background: transparent; color: var(--muted); }
       const sum = document.createElement("summary");
       sum.innerHTML = `<svg class="chev" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M5 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
       const title = document.createElement("span"); title.className = "title"; title.textContent = s.name;
+      const dues = [...new Set(s.items.map((i) => i.due).filter(Boolean))];
+      if (dues.length === 1) {
+        const late = sDone < s.items.length && isLate(dues[0]);
+        const du = document.createElement("span"); du.className = "due" + (late ? " late" : "");
+        du.textContent = (late ? "Overdue · was due " : "Done by ") + dueLabel(dues[0]);
+        title.append(du);
+      }
       const count = document.createElement("span"); count.className = "count" + (sDone === s.items.length ? " full" : ""); count.textContent = `${sDone}/${s.items.length}`;
       sum.append(title, count);
       d.append(sum);

@@ -9,6 +9,7 @@ Every change to the list happens in `checklist.md`. The format is strict:
 - `# Section name` starts a section (for example `# Post-Service Breakdown (After 11:30 AM)`).
 - `## Group name` starts an optional sub-group inside a section.
 - `- Item text` is one checkbox. One line per item.
+- `Done by: 9:00 AM` right under a `#` heading sets the Sabbath deadline for every item in that section. Under a `##` heading it sets the deadline for just that sub-group. Sections without one have no deadline.
 - Blank lines are fine. Any other kind of line makes the deploy fail on purpose, so the live site never breaks.
 
 Order in the file is the order on the site.
@@ -37,4 +38,5 @@ The Support Team Guide Google Doc ("Support Team Guide (Editable)", owned by Nic
 
 - `public/index.html`: the page volunteers see.
 - `netlify/functions/checks.mts`: saves and reads checkmarks (Netlify Blobs store `support-checks`, one entry per checked item, keyed by week).
+- `netlify/functions/deadline-alerts.mts`: on Saturdays, 10 minutes before each "Done by" time, DMs the people in the Netlify env var `SLACK_ALERT_USERS` the unchecked items for that deadline, through the "Support Checklist" Slack app (`SLACK_BOT_TOKEN`). Sends nothing if all are done. Running it by hand on another day sends one TEST message.
 - Netlify project `ah-support-checklist`, team Advent Hope Staff. Owner: Todd Stout.

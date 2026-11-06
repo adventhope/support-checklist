@@ -4,6 +4,7 @@
 - Support Team schedule must be sent by Wednesday every week.
 
 # Pre-Service Setup (Before 9 AM)
+Done by: 9:00 AM
 
 ## When Opening the Building
 - Turn on the AC in the downstairs lobby (near the men’s restroom) and set it to 71°F.
@@ -11,9 +12,6 @@
 - Turn on the AC in the first Sabbath School room and set it to 71°F.
 - Turn on the AC in the second Sabbath School room and set it to 71°F.
 - Turn on the AC in the third Sabbath School room and set it to 71°F.
-
-## When Leaving
-- Set all basement AC units to 80°F.
 
 ## Headsets
 - Put on a headset.
@@ -42,6 +40,7 @@
 - Ensure that audio and video are working around the entryway and all spaces downstairs. Let audio and video leads know if you’re not getting a signal.
 
 # Main Hall A/V Setup (Full Detailed)
+Done by: 10:20 AM
 
 ## Projector Station Setup
 - Move table to angled position in front of organ
@@ -70,6 +69,7 @@
 - Ask pastor/producer if podium is needed
 
 # Sabbath School Classroom Setups
+Done by: 10:20 AM
 
 ## Kinder / Cradle Roll
 - Turn on back speakers
@@ -101,6 +101,7 @@
 - Use keyboard + trackpad
 
 # Checklist Before 10:20 AM
+Done by: 10:20 AM
 - Set up Children-with-their-Grownups area
 - Place the Children’s classroom rug in front of the Kinder classroom
 - Set up remaining Owl cameras
@@ -117,10 +118,12 @@
 - Be ready to set up for Children’s Church, baptisms, and Conversations and Cuisine, including all the steps for each
 
 # Checklist Before 11:30 AM Service
+Done by: 11:30 AM
 - Turn ON all building TV audio
 - Break down Adult Bible Study (TV, computer, Owl)
 
 # Post-Service Breakdown (After 11:30 AM)
+Done by: 2:00 PM
 
 ## A/V
 - Check with Rodrigo about video announcement computer
