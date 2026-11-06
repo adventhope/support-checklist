@@ -15,6 +15,19 @@ export function deadlineToWarn(items, minutes) {
 
 export const unchecked = (items, checks, due) => items.filter((i) => i.due === due && !checks[i.id]);
 
+// The deadline that started within the last WARN_MINUTES (used for the "caught up" note), or null.
+export function deadlineJustPassed(items, minutes) {
+  return deadlines(items).find((d) => minutes >= toMinutes(d) && minutes < toMinutes(d) + WARN_MINUTES) ?? null;
+}
+
+const countDue = (items, due) => items.filter((i) => i.due === due).length;
+
+export function allDoneMessage(items, due, { caughtUp = false, test = false } = {}) {
+  const n = countDue(items, due);
+  const what = `${n} item${n === 1 ? "" : "s"} due by ${label(due)}`;
+  return `${test ? "*TEST* — " : ""}:white_check_mark: ${caughtUp ? `All caught up. Every one of the ${what} is now done.` : `All ${what} are done, ahead of time.`} Thank you, team!`;
+}
+
 export function message(due, missing, { test = false } = {}) {
   const lines = missing.map((i) => `• ${i.text}  _(${i.group || i.section})_`);
   const head = `${test ? "*TEST* — " : ""}*${missing.length} checklist item${missing.length === 1 ? "" : "s"} not done yet, due by ${label(due)}*`;
