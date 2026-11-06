@@ -1,6 +1,6 @@
 // Turns checklist.md into netlify/lib/items.mjs, which the site reads.
 // Netlify runs this on every deploy. Run it yourself with: npm run build
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 
 const src = readFileSync(new URL("../checklist.md", import.meta.url), "utf8");
@@ -29,6 +29,7 @@ if (problems.length) { console.error("checklist.md has problems:\n" + problems.j
 if (items.length < 5) { console.error(`checklist.md has only ${items.length} items; refusing to publish an almost-empty list.`); process.exit(1); }
 
 const updated = new Date().toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+mkdirSync(new URL("../netlify/lib/", import.meta.url), { recursive: true });
 writeFileSync(new URL("../netlify/lib/items.mjs", import.meta.url),
   `// GENERATED from checklist.md by scripts/build-items.mjs. Do not edit; edit checklist.md.\n` +
   `export const SOURCE_DATE = ${JSON.stringify(updated)};\n` +

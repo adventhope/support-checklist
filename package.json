@@ -3,10 +3,13 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@netlify/blobs": "^11.1.7",
+    "@netlify/blobs": "11.1.7",
     "@netlify/functions": "^6.1.0"
   },
   "scripts": {
     "build": "node scripts/build-items.mjs"
+  },
+  "overrides": {
+    "@netlify/otel": "7.0.6"
   }
 }
