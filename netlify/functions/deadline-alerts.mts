@@ -12,8 +12,8 @@ import { deadlines, deadlineToWarn, unchecked, message } from "../lib/alerts.mjs
 //   SLACK_BOT_TOKEN    Bot token of the "Support Checklist" Slack app (xoxb-...)
 //   SLACK_ALERT_USERS  Comma-separated Slack member IDs to DM
 //
-// Running this function by hand on any day but Saturday sends one TEST message
-// for the next deadline, so you can confirm delivery.
+// The first run outside Saturday (Eastern) sends one TEST message for the next deadline,
+// so delivery can be confirmed. After that, non-Saturday runs send nothing.
 
 const checksStore = () => getStore({ name: "support-checks", consistency: "strong" });
 const sentStore = () => getStore({ name: "support-alerts", consistency: "strong" });
@@ -54,12 +54,14 @@ export default async () => {
   }
   if (!due) return;
 
-  const sentKey = test ? `test/${new Date().toISOString().slice(0, 13)}` : `${week}/${due}`;
+  // The schedule is in UTC, so it also fires Friday evening Eastern. Outside Saturday Eastern,
+  // only one TEST message is ever sent (delete the "test/once" key in the support-alerts store to test again).
+  const sentKey = test ? "test/once" : `${week}/${due}`;
   if (await sentStore().get(sentKey)) return; // already sent
 
   const checks = await currentChecks(week);
   let missing = unchecked(ITEMS, checks, due);
-  if (test && !missing.length) missing = ITEMS.filter((i: any) => i.due === due).slice(0, 3);
+  if (test) missing = (missing.length ? missing : ITEMS.filter((i: any) => i.due === due)).slice(0, 3);
   if (!missing.length) { await sentStore().set(sentKey, "nothing-missing"); return; }
 
   const text = message(due, missing, { test });
