@@ -15,8 +15,11 @@
 ## When Leaving
 - Set all basement AC units to 80°F.
 
+## Headsets
+- Put on a headset.
+
 ## Lobby / Outdoor Setup
-- Set up lobby signs
+- Set up lobby signs if the greeters haven't already
 - Flip marquis to Advent Hope
 - Turn on heater/air curtain if cold
 
@@ -62,7 +65,7 @@
 - Cover cords
 
 ## Chair Setup for Worship
-- 5 chairs across × 3 rows on each side of aisle
+- 4 chairs across × 3 rows on each side of aisle
 - 2 rows of 4 facing platform
 - Ask pastor/producer if podium is needed
 
@@ -81,6 +84,7 @@
 - Select correct camera feed
 - Arrange 8 kids chairs + 16 adult chairs
 - Keep extra chairs stacked
+- Place a divider between Kinder and the other classrooms
 
 ## General Owl Instructions
 - Connect power + HDMI
@@ -98,6 +102,7 @@
 
 # Checklist Before 10:20 AM
 - Set up Children-with-their-Grownups area
+- Place the Children’s classroom rug in front of the Kinder classroom
 - Set up remaining Owl cameras
 - Connect ALL classes to their Zoom sessions
 - Adult SS: Use camera only (audio goes through main board + Advent Hope Events Zoom)
@@ -107,6 +112,9 @@
 - Assist producers
 - Support live transitions
 - Set out refreshments at 11:30 AM
+- Troubleshoot technical issues for each of the Sabbath Schools as needed
+- Store equipment away for each of the classrooms
+- Be ready to set up for Children’s Church, baptisms, and Conversations and Cuisine, including all the steps for each
 
 # Checklist Before 11:30 AM Service
 - Turn ON all building TV audio
@@ -136,6 +144,8 @@
 - Reset seating
 - Put away signs
 - Turn off moving lights (switches are on the second column)
+- Return headsets by the end of service
+- Keep a long table and stack of chairs in the Fellowship Room for Sunday Church
 - After the prayer meeting ends, shut down the production computer.
 - After the prayer meeting ends, turn off the power for the sound system (first amps; then board)
 - Lock doors after 1:30 PM
