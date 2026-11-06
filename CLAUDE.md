@@ -38,5 +38,5 @@ The Support Team Guide Google Doc ("Support Team Guide (Editable)", owned by Nic
 
 - `public/index.html`: the page volunteers see.
 - `netlify/functions/checks.mts`: saves and reads checkmarks (Netlify Blobs store `support-checks`, one entry per checked item, keyed by week).
-- `netlify/functions/deadline-alerts.mts`: on Saturdays, 10 minutes before each "Done by" time, DMs the people in the Netlify env var `SLACK_ALERT_USERS` the unchecked items for that deadline, through the "Support Checklist" Slack app (`SLACK_BOT_TOKEN`). Sends nothing if all are done. Running it by hand on another day sends one TEST message.
+- `netlify/functions/deadline-alerts.mts`: on Saturdays, 10 minutes before each "Done by" time, messages the people and channels in the Netlify env var `SLACK_ALERT_USERS` the unchecked items for that deadline (or an "all done" note if nothing is left, and a "caught up" note at the deadline if the team finished after a warning), through the "Support Checklist" Slack app (`SLACK_BOT_TOKEN`). Outside Saturday it only sends a one-time TEST message to any newly added recipient.
 - Netlify project `ah-support-checklist`, team Advent Hope Staff. Owner: Todd Stout.

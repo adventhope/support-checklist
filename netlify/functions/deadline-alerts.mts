@@ -12,9 +12,9 @@ import { deadlines, deadlineToWarn, deadlineJustPassed, unchecked, message, allD
 //
 // Netlify environment variables (set in the Netlify UI, never in this public repo):
 //   SLACK_BOT_TOKEN    Bot token of the "Support Checklist" Slack app (xoxb-...)
-//   SLACK_ALERT_USERS  Comma-separated Slack member IDs to DM
+//   SLACK_ALERT_USERS  Comma-separated Slack member IDs (DMs) and/or channel IDs (bot must be in the channel)
 //
-// The first run outside Saturday (Eastern) sends one TEST message for the next deadline,
+// Outside Saturday (Eastern), each recipient gets one TEST message the first time it is listed,
 // so delivery can be confirmed. After that, non-Saturday runs send nothing.
 
 const checksStore = () => getStore({ name: "support-checks", consistency: "strong" });
@@ -53,14 +53,25 @@ export default async () => {
   const { weekday, minutes } = nowET();
   const sent = sentStore();
 
-  // Not Saturday in Eastern time: one-time TEST message only.
+  // Not Saturday in Eastern time: one TEST message per recipient, ever, so a newly added
+  // person or channel gets one test and nobody else is bothered again.
   if (weekday !== "Sat") {
-    if (await sent.get("test/once")) return;
+    // The first test (Nov 6) went to the people listed then, under a single key; count those people as tested.
+    if ((await sent.get("test/once")) && !(await sent.get("test/migrated"))) {
+      for (const u of users.filter((u) => u.startsWith("U"))) await sent.set(`test/${u}`, "before-per-recipient");
+      await sent.set("test/migrated", new Date().toISOString());
+    }
+    const pending: string[] = [];
+    for (const u of users) if (!(await sent.get(`test/${u}`))) pending.push(u);
+    if (!pending.length) return;
     const all = deadlines(ITEMS);
     const due = all.find((d) => toMinutes(d) > minutes) ?? all[0];
     if (!due) return;
-    const sample = ITEMS.filter((i: any) => i.due === due).slice(0, 3);
-    if (await sendAll(token, users, message(due, sample, { test: true }))) await sent.set("test/once", new Date().toISOString());
+    const text = message(due, ITEMS.filter((i: any) => i.due === due).slice(0, 3), { test: true });
+    for (const u of pending) {
+      try { await dm(token, u, text); await sent.set(`test/${u}`, new Date().toISOString()); console.log(`Sent test to ${u}.`); }
+      catch (e) { console.error(e); }
+    }
     return;
   }
 
